@@ -6,13 +6,13 @@ jobs:
   pool:
     vmImage: ubuntu-latest
   displayName: Run JMeter tests
-  environment:
-      name:   'My Env'
-      resourceType: VirtualMachine
-      tags: app
   steps:
   - task: Bash@3
     displayName: Execute JMeter tests
+    environment:
+      name:   'My Env'
+      resourceType: VirtualMachine
+      tags: app
     inputs:
       targetType: filePath
       filePath: 'jmeter/test.sh'
@@ -21,6 +21,10 @@ jobs:
       failOnStderr: true
   - task: PublishPipelineArtifact@1
     displayName: Publish JMeter Report
+    environment:
+      name:   'My Env'
+      resourceType: VirtualMachine
+      tags: app
     inputs:
       targetPath: jmeter/report
       artifact: jmeter
